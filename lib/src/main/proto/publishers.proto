@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package finazon;
+
+option java_multiple_files=true;
+option java_package="io.finazon";
+
+message PublisherItem {
+  string code = 1;
+  string name = 2;
+}
+
+message GetPublishersRequest {
+  string code = 1;
+  int32  page = 2;
+  int32  page_size = 3;
+}
+
+message GetPublishersResponse {
+  repeated PublisherItem result = 1;
+}
+
+/**
+ * PublisherService provide access to Finazon publishers
+ */
+service PublisherService {
+  // Get a list of all publishers available at Finazon.
+  rpc GetPublishers(GetPublishersRequest) returns (GetPublishersResponse) {};
+}

@@ -1,0 +1,12 @@
+plugins {
+    id("example.java-conventions")
+}
+
+archivesBaseName "finazon-grpc-java-client-example-time-series"
+mainClassName = "io.finazon.example.Main"
+
+jar {
+    manifest {
+        attributes "Main-Class": "$mainClassName"
+    }
+}

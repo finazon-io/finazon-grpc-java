@@ -1,0 +1,25 @@
+plugins {
+    id 'java-library'
+    id 'java-gradle-plugin'
+}
+group = "io.finazon"
+repositories {
+    mavenCentral()
+    gradlePluginPortal()
+}
+
+dependencies {
+    implementation "com.google.protobuf:protobuf-gradle-plugin:0.9.4"
+    implementation "com.squareup.wire:wire-schema-jvm:4.9.3"
+    implementation "com.hubspot.jinjava:jinjava:2.7.2"
+    implementation "com.google.guava:guava:31.0.1-jre"
+}
+
+gradlePlugin {
+    plugins {
+        CodeGeneratorPlugin {
+            id = 'io.finazon.gradleplugin.codegen'
+            implementationClass = 'io.finazon.gradleplugin.CodeGeneratorPlugin'
+        }
+    }
+}

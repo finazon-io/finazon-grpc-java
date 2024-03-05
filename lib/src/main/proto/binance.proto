@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package finazon;
+
+option java_multiple_files=true;
+option java_package="io.finazon";
+
+message BinanceTimeSeries {
+  int64 timestamp = 1;
+  double open = 2;
+  double close = 3;
+  double high = 4;
+  double low = 5;
+  double trades = 6;
+  double base_volume = 7;
+  double quote_volume = 8;
+  double taker_buy_base_asset_volume = 9;
+  double taker_buy_quote_asset_volume = 10;
+}
+
+message GetBinanceTimeSeriesRequest {
+  reserved 4;
+  reserved "date";
+
+  string ticker = 1;
+  string timezone = 2;
+  string interval = 3;
+  int64 start_at = 5;
+  int64 end_at = 6;
+  int32 page = 7;
+  int32 page_size = 8;
+  string order = 9;
+}
+
+message GetBinanceTimeSeriesResponse {
+  repeated BinanceTimeSeries result = 1;
+}
+
+/**
+ * BinanceService provide access to time series data
+ */
+service BinanceService {
+  // Get time series data without technical indicators
+  rpc GetTimeSeries(GetBinanceTimeSeriesRequest) returns (GetBinanceTimeSeriesResponse) {};
+}

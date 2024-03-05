@@ -1,0 +1,9 @@
+buildscript {
+    ext.grpcVersion = '1.61.1'
+    ext.protobufVersion = '3.16.1'
+}
+
+allprojects {
+    group = 'io.finazon'
+    version = '1.0.0'
+}

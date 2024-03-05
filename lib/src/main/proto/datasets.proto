@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package finazon;
+
+option java_multiple_files=true;
+option java_package="io.finazon";
+
+message DatasetItem {
+  string code = 1;
+  string name = 2;
+}
+
+message GetDatasetsRequest {
+  string code = 1;
+  int32  page = 2;
+  int32  page_size = 3;
+}
+
+message GetDatasetsResponse {
+  repeated DatasetItem result = 1;
+}
+
+/**
+ * DatasetsService provide access to Finazon datasets
+ */
+service DatasetsService {
+  // Get a list of all datasets available at Finazon.
+  rpc GetDatasets(GetDatasetsRequest) returns (GetDatasetsResponse) {};
+}

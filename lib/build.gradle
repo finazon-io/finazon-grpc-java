@@ -1,0 +1,89 @@
+plugins {
+    id "java"
+    id "java-library"
+    id "idea"
+    id "com.google.protobuf" version "0.9.4"
+    id 'io.finazon.gradleplugin.codegen'
+    id 'maven-publish'
+}
+
+archivesBaseName "finazon-grpc-java"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly "com.google.protobuf:protobuf-java:${protobufVersion}"
+    compileOnly "com.google.protobuf:protobuf-java-util:${protobufVersion}"
+    implementation "io.grpc:grpc-auth:${grpcVersion}"
+    implementation "io.grpc:grpc-stub:${grpcVersion}"
+    api "io.grpc:grpc-protobuf:${grpcVersion}"
+    api "io.grpc:grpc-services:${grpcVersion}"
+    implementation "com.google.auth:google-auth-library-oauth2-http:1.18.0"
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.16.0"
+    }
+    plugins {
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.15.1'
+        }
+    }
+    generateProtoTasks {
+        ofSourceSet('main').configureEach {
+            plugins {
+                grpc {}
+            }
+        }
+    }
+}
+
+generateProto {
+    finalizedBy("createExtGrpcService")
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            pom {
+                name = 'finazon-grpc-java'
+                description = 'Finazon gRPC client library for Java'
+                url = 'https://github.com/finazon-io/finazon-grpc-java'
+                inceptionYear = '2024'
+
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'http://www.opensource.org/licenses/mit-license.php'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'Finazon'
+                        name = 'Finazon'
+                        email = 'team@finazon.io'
+                    }
+                }
+                scm {
+                    connection='scm:git:git:github.com/finazon-io/finazon-grpc-java.git'
+                    developerConnection='scm:git:https://github.com/finazon-io/finazon-grpc-java.git'
+                    url='https://github.com/finazon-io/finazon-grpc-java'
+                }
+            }
+        }
+        repositories {
+            maven {
+                url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+                credentials {
+                    username = project.properties["username"].toString()
+                    password = project.properties["password"].toString()
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,14 @@
+plugins {
+    id "java"
+    id "application"
+    id "idea"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(":lib")
+    runtimeOnly "io.grpc:grpc-netty-shaded:${grpcVersion}"
+}
