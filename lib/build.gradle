@@ -5,6 +5,7 @@ plugins {
     id "com.google.protobuf" version "0.9.4"
     id 'io.finazon.gradleplugin.codegen'
     id 'maven-publish'
+    id 'signing'
 }
 
 archivesBaseName "finazon-grpc-java"
@@ -45,10 +46,16 @@ generateProto {
     finalizedBy("createExtGrpcService")
 }
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
             from components.java
+            artifactId='finazon-grpc-java'
 
             pom {
                 name = 'finazon-grpc-java'
@@ -75,16 +82,21 @@ publishing {
                     url='https://github.com/finazon-io/finazon-grpc-java'
                 }
             }
-        }
-        repositories {
-            maven {
-                name = "OSSRH"
-                url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-                credentials {
-                    username = System.getenv("MAVEN_USERNAME")
-                    password = System.getenv("MAVEN_PASSWORD")
+            repositories {
+                maven {
+                    url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+                    credentials {
+                        username = System.getenv("MAVEN_USERNAME")
+                        password = System.getenv("MAVEN_PASSWORD")
+                    }
                 }
             }
         }
     }
 }
+
+signing {
+    sign(publishing.publications["mavenJava"])
+}
+
+
