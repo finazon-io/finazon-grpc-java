@@ -2,7 +2,7 @@ plugins {
     id("example.java-conventions")
 }
 
-archivesBaseName "finazon-grpc-java-client-example-time-series"
+archivesBaseName = "finazon-grpc-java-client-example-time-series"
 mainClassName = "io.finazon.example.Main"
 
 jar {

@@ -2,7 +2,7 @@ plugins {
     id("example.java-conventions")
 }
 
-archivesBaseName "finazon-grpc-java-client-example-tickers"
+archivesBaseName = "finazon-grpc-java-client-example-tickers"
 mainClassName = "io.finazon.example.Main"
 
 jar {
