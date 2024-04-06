@@ -11,4 +11,4 @@ bump_version:
 
 .PHONY: publish
 publish:
-	gradle :lib:publish
+	gradle :lib:publishToMavenCentral
