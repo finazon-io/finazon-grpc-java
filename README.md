@@ -18,13 +18,13 @@ You can now integrate this library in your project via Maven.
     <dependency>
         <groupId>io.finazon</groupId>
         <artifactId>finazon-grpc-java</artifactId>
-        <version>1.0</version>
+        <version>1.0.0</version>
     </dependency>
 ```
 
 #### Gradle
 ```
-    implementation "io.finazon:finazon-grpc-java:1.0"
+    implementation "io.finazon:finazon-grpc-java:1.0.0"
 ```
 
 ### 2. Create `App.java` script
