@@ -9,6 +9,6 @@ repositories {
 }
 
 dependencies {
-    implementation project(":lib")
+    implementation "io.finazon:finazon-grpc-java:${version}"
     runtimeOnly "io.grpc:grpc-netty-shaded:${grpcVersion}"
 }
