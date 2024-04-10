@@ -21,4 +21,5 @@ bump_version:
 
 .PHONY: publish
 publish:
+	@echo -e "signing.keyId=$GRPC_JAVA_SIGNING_KEY_ID\nsigning.password=$GRPC_JAVA_SIGNING_PASSWORD\nsigning.secretKeyRingFile=$GRPC_JAVA_SIGNING_KEY_FILE\nmavenCentralUsername=$GRPC_JAVA_MAVEN_USER\nmavenCentralPassword=$GRPC_JAVA_MAVEN_PASSWORD" > gradle.properties
 	gradle :lib:publishToMavenCentral
